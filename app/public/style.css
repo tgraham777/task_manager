@@ -1,0 +1,87 @@
+h1 {
+  font-family: serif;
+  font-style: italic;
+  color: #CC0000;
+}
+
+#new-task {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.container {
+  text-align: center;
+}
+
+#homepage_button {
+  background-color: #DDD;
+}
+
+#buttons li {
+  list-style: none;
+  display: inline-block;
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: #0000BB;
+}
+
+#freak-out {
+  width: 20%;
+  height: auto;
+  border-style: solid;
+  border-color: #CCC;
+}
+
+button {
+  background-color: #DDD;
+  border-radius: 5px;
+}
+
+body {
+  color: #DDD;
+  background-color: #0099CC;
+}
+
+#list {
+  text-align: left;
+  padding-left: 440px;
+  padding-top: 15px;
+}
+
+h3 a {
+  color: #FFF;
+}
+
+#index_button {
+  border-width: medium;
+  border-radius: 5px;
+}
+
+#new-task {
+  color: #FFF;
+}
+
+#title {
+  color: #FFF;
+}
+
+#description {
+  color: #FFF;
+}
+
+#buttons {
+  padding-left: 0px;
+}
+
+#delete_input {
+  background-color: #DDD;
+  color: #EE0000;
+  border-radius: 5px;
+}
+
+#task_description {
+  color: #FFF;
+}

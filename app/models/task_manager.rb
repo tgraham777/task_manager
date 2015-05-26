@@ -1,35 +1,42 @@
 require 'yaml/store'
-require_relative 'task'
 
 class TaskManager
-  def self.create(task)
-    database.transaction do
-      database['tasks'] ||= []
-      database['total'] ||= 0
-      database['total'] += 1
-      database['tasks'] << { "id" => database['total'], "title" => task[:title], "description" => task[:description] }
-    end
-  end
-
   def self.database
-    @database ||= YAML::Store.new("db/task_manager")
+    if ENV["TASK_MANAGER_ENV"] == 'test'
+      @database ||= Sequel.sqlite("db/task_manager_test.sqlite3")
+    else
+      @database ||= Sequel.sqlite("db/task_manager.sqlite3")
+    end
   end
 
-  def self.raw_tasks
-    database.transaction do
-      database['tasks'] || []
-    end
+  def self.create(task)
+    dataset.insert(task)
   end
 
   def self.all
-    raw_tasks.map { |data| Task.new(data) }
-  end
-
-  def self.raw_task(id)
-    raw_tasks.find { |task| task["id"] == id }
+    dataset.map do |data|
+      Task.new(data)
+    end
   end
 
   def self.find(id)
-    Task.new(raw_task(id))
+    task = dataset.where(id: id)
+    Task.new(task.to_a.first)
+  end
+
+  def self.update(id, data)
+    dataset.where(id: id).update(data)
+  end
+
+  def self.delete(id)
+    dataset.where(id: id).delete
+  end
+
+  def self.delete_all
+    dataset.delete
+  end
+
+  def self.dataset
+    database.from(:tasks)
   end
 end
